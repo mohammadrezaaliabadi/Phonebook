@@ -1,0 +1,41 @@
+﻿@model Phonebook.Models.PhoneBookIndexViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h3>@Html.DisplayFor(modelItem =>  modelItem.Person.LastName)</h3>
+
+<p>
+    <a asp-action="Add" asp-route-pid="@Model.Person.Id">Add</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Phones[0].Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phones[0].Number)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Phones) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Number)
+            </td>
+            <td>
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> |
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

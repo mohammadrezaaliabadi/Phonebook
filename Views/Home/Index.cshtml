@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Person>;
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Persons</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Picture)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phones)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @{ if (item.Type)
+                    {
+                        <span>Real</span>
+                    }
+                    else
+                    {
+                        <span>Civil</span>
+
+                    }
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                <img src="~/images/@item.Picture" asp-append-version="true" style="width:128px;height:128px;" />
+            </td>
+            <td>
+                <a asp-controller="Phones" asp-action="Index" asp-route-pid="@item.Id">Phones</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
